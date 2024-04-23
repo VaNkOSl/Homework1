@@ -1,35 +1,22 @@
 ﻿namespace Homework;
 public class ClassHelper
 {
-    public int[] RemoveDuplicates(int[] array)
-    {
-        int n = array.Length;
-        int[] uniqueArray = new int[n];
-        int index = 0;
+        public static int[] RemoveDuplicates(int[] array)
+       {
+           Dictionary<int, bool> seen = new Dictionary<int, bool>();
+           List<int> uniqueList = new List<int>();
 
-        for (int i = 0; i < n; i++)
-        {
-            bool isDuplicated = false;
+           foreach (int num in array)
+           {
+               if (!seen.ContainsKey(num))
+               {
+                   uniqueList.Add(num);
+                   seen[num] = true;
+               }
+           }
 
-            for (int j = 0; j < i; j++)
-            {
-                if (array[i] == array[j])
-                {
-                    isDuplicated = true;
-                    break;
-                }
-            }
-
-            if (!isDuplicated)
-            {
-                uniqueArray[index++] = array[i];
-            }
-        }
-
-        Array.Resize(ref uniqueArray, index);
-
-        return uniqueArray;
-    }
+           return uniqueList.ToArray();
+       }
 
     public void PrintArray(int[] array)
     {
