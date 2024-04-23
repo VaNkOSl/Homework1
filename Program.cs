@@ -8,6 +8,10 @@
 
             Console.WriteLine("Enter the number of element array");
             int n = int.Parse(Console.ReadLine()!);
+            if(n < 0)
+            {
+                Console.WriteLine("Numbers must be positive");
+            }
 
             int[] originalArray = new int[n];
 
