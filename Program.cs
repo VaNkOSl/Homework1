@@ -4,44 +4,30 @@
     {
         static void Main(string[] args)
         {
-
-            Console.WriteLine("Enter the first 9 digits of the ISBN: ");
-            string userInput = Console.ReadLine()!;
-
-            int checkDigit = CalculateCheckDigit(userInput);
-
-            string result;
-            if (checkDigit == 10)
-            {
-                result = "X";
-            }
-            else
-            {
-                result = checkDigit.ToString();
-            }
-
-            Console.WriteLine("The result ISBN is: " + userInput + result);
+             Console.Write("Input the first 9 digits of the ISBN: ");
+             string input = Console.ReadLine()!;
+            
+             string isbn = input + CalculateCheckDigit(input);
+             Console.WriteLine("ISBN-10: " + isbn);
         }
 
-        private static int CalculateCheckDigit(string isbnDigits)
-        {
-            int sum = 0;
-            for (int i = 0; i < isbnDigits.Length; i++)
-            {
-                int digit = int.Parse(isbnDigits[i].ToString());
-                sum += digit * (i + 1);
-            }
-
-            int checkDigit = sum % 11;
-
-            if (checkDigit == 10 )
-            {
-                return checkDigit;
-            }
-            else
-            {
-                return checkDigit;
-            }
-        }
+       public static string CalculateCheckDigit(string input)
+       {
+               int[] digits = new int[input.Length];
+               for (int i = 0; i < input.Length; i++)
+               {
+                   digits[i] = int.Parse(input[i].ToString());
+               }
+        
+               int sum = 0;
+               for (int i = 0; i < digits.Length; i++)
+               {
+                   sum += (i + 2) * digits[digits.Length - 1 - i];
+               }
+        
+               int checkDigit = (11 - (sum % 11)) % 11;
+        
+               return checkDigit == 10 ? "X" : checkDigit.ToString();
+       }
     }
 }
