@@ -4,15 +4,10 @@
     {
         static void Main(string[] args)
         {
-            ClassHelper classHelper = new ClassHelper();
 
             Console.WriteLine("Enter the number of element array");
             int n = int.Parse(Console.ReadLine()!);
-            if(n < 0)
-            {
-                Console.WriteLine("Numbers must be positive");
-            }
-
+            
             int[] originalArray = new int[n];
 
             Console.WriteLine("Enter the element of array");
@@ -22,13 +17,39 @@
             }
 
             Console.WriteLine("Original Array:");
-            classHelper.PrintArray(originalArray);
+            PrintArray(originalArray);
 
 
-            int[] uniqueArray = classHelper.RemoveDuplicates(originalArray);
+            int[] uniqueArray = RemoveDuplicates(originalArray);
             Console.WriteLine("Unique Array");
 
-            classHelper.PrintArray(uniqueArray);
+            PrintArray(uniqueArray);
         }
+
+      public static int[] RemoveDuplicates(int[] array)
+       {
+           Dictionary<int, bool> seen = new Dictionary<int, bool>();
+           List<int> uniqueList = new List<int>();
+
+           foreach (int num in array)
+           {
+               if (!seen.ContainsKey(num))
+               {
+                   uniqueList.Add(num);
+                   seen[num] = true;
+               }
+           }
+
+           return uniqueList.ToArray();
+       }
+
+        public void PrintArray(int[] array)
+        {
+            foreach (int element in array)
+            {
+                Console.Write(element + "");
+            }
+            Console.WriteLine();
+        }   
     }
 }
