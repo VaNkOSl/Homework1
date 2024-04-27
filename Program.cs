@@ -26,22 +26,37 @@
             PrintArray(uniqueArray);
         }
 
-      public static int[] RemoveDuplicates(int[] array)
-       {
-           Dictionary<int, bool> seen = new Dictionary<int, bool>();
-           List<int> uniqueList = new List<int>();
+     public static int[] RemoveDuplicates(int[] array)
+    {
+        int length = array.Length;
 
-           foreach (int num in array)
-           {
-               if (!seen.ContainsKey(num))
-               {
-                   uniqueList.Add(num);
-                   seen[num] = true;
-               }
-           }
+        if (length == 0 || length == 1)
+        {
+            return array;
+        }
 
-           return uniqueList.ToArray();
-       }
+        int uniqueCount = 1;
+        for (int i = 1; i < length; i++)
+        {
+            bool isDuplicate = false;
+            for (int j = 0; j < uniqueCount; j++)
+            {
+                if (array[i] == array[j])
+                {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+            if (!isDuplicate)
+            {
+                array[uniqueCount] = array[i];
+                uniqueCount++;
+            }
+        }
+
+        Array.Resize(ref array, uniqueCount);
+        return array;
+    }
 
         public void PrintArray(int[] array)
         {
